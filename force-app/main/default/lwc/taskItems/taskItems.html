@@ -1,0 +1,34 @@
+<template>
+  <lightning-card title="Task Items" icon-name="custom:custom75">
+    <!--ACTIONS -->
+    <div class="slds-p-horizontal_small slds-p-bottom_small slds-grid slds-gutters">
+      <div class="slds-col">
+        <lightning-input type="text" label="New task title"
+                         value={newTitle} onchange={handleTitleChange}>
+        </lightning-input>
+      </div>
+      <div class="slds-col">
+        <lightning-input type="date" label="Due date"
+                         value={newDueDate} onchange={handleDueDateChange}>
+        </lightning-input>
+      </div>
+      <div class="slds-col slds-align_absolute-center">
+        <lightning-button variant="brand" label="Add task" onclick={create} class="slds-m-top_large"></lightning-button>
+      </div>
+    </div>
+
+    <!-- LISTE -->
+    <template if:true={tasks}>
+      <lightning-datatable key-field="Id" data={tasks} columns={columns}
+                           hide-checkbox-column
+                           onrowaction={handleRowAction}>
+      </lightning-datatable>
+    </template>
+
+    <template if:true={loading}>
+      <div class="slds-p-around_medium slds-text-align_center">
+        <lightning-spinner alternative-text="Loading"></lightning-spinner>
+      </div>
+    </template>
+  </lightning-card>
+</template>
